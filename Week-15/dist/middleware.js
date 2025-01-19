@@ -7,16 +7,17 @@ exports.userMiddleware = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const userMiddleware = (req, res, next) => {
     const header = req.headers["authorization"];
-    const decoded = jsonwebtoken_1.default.verify(header, process.env.JWT_SECRET);
-    if (decoded) {
-        // @ts-ignore
+    if (!header) {
+        res.status(403).json({ message: "Authorization header is missing" });
+        return;
+    }
+    try {
+        const decoded = jsonwebtoken_1.default.verify(header, process.env.JWT_SECRET);
         req.userId = decoded.id;
         next();
     }
-    else {
-        res.status(403).json({
-            message: "Please Login first !"
-        });
+    catch (error) {
+        res.status(403).json({ message: "Invalid token" });
     }
 };
 exports.userMiddleware = userMiddleware;

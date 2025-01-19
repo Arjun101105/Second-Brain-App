@@ -1,17 +1,26 @@
-import { NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { Request, Response } from "express";
 
-export const userMiddleware = (req:Request,res:Response,next:NextFunction)=>{
-    const header = req.headers["authorization"];
-    const decoded = jwt.verify(header as string,process.env.JWT_SECRET as string);
-    if(decoded){
-        // @ts-ignore
-        req.userId = decoded.id
-        next()
-    }else{
-        res.status(403).json({
-            message:"Please Login first !" 
-        })
-    }
+export interface AuthenticatedRequest extends Request {
+  userId?: string;
 }
+
+export const userMiddleware = (
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+): void => {
+  const header = req.headers["authorization"];
+  if (!header) {
+    res.status(403).json({ message: "Authorization header is missing" });
+    return;
+  }
+
+  try {
+    const decoded = jwt.verify(header, process.env.JWT_SECRET as string) as { id: string };
+    req.userId = decoded.id;
+    next();
+  } catch (error) {
+    res.status(403).json({ message: "Invalid token" });
+  }
+};
