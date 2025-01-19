@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { BACKEND_URL } from "../config";
 
 export const useContent = () => {
   const [contents, setContents] = useState([]);
@@ -8,7 +7,7 @@ export const useContent = () => {
   useEffect(() => {
     const fetchContents = async () => {
         try {
-          const response = await axios.get(`${BACKEND_URL}/api/v1/content`, { 
+          const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/v1/content`, { 
             headers: {
               "Authorization": localStorage.getItem("token")
             },
