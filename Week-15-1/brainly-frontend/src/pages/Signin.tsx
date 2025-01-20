@@ -4,7 +4,6 @@ import { Input } from "../components/Input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const VITE_APP_API_URL = import.meta.env.VITE_APP_API_URL;
 
 export function Signin(){
     const usernameRef = useRef<any>()
@@ -15,7 +14,7 @@ export function Signin(){
         const username = usernameRef.current?.value
         const password = passwordRef.current?.value
         try{
-            const response = await axios.post(`${VITE_APP_API_URL}/api/v1/signin`,{username,password})
+            const response = await axios.post(`/api/v1/signin`,{username,password})
             const jwt = response.data.token;
             localStorage.setItem("token", jwt)
             navigate("/dashboard")

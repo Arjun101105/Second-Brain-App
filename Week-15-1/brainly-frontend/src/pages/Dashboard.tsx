@@ -10,7 +10,6 @@ import { useContent } from "../hooks/useContent";
 import axios from "axios";
 
 
-const VITE_APP_API_URL = import.meta.env.VITE_APP_API_URL;
 
 function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -30,7 +29,7 @@ function Dashboard() {
           />
         <div className="flex justify-end gap-4">
           <Button onClick={async () => {
-            const response = await axios.post(`${VITE_APP_API_URL}/api/v1/brain/share`, {
+            const response = await axios.post(`/api/v1/brain/share`, {
                 share: true
             }, {
                 headers: {

@@ -4,7 +4,6 @@ import { Input } from "../components/Input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const VITE_APP_API_URL = import.meta.env.VITE_APP_API_URL;
 
 export function Signup(){
 
@@ -16,7 +15,7 @@ export function Signup(){
         const username = usernameRef.current?.value
         const password = passwordRef.current?.value
         try{
-            await axios.post(`${VITE_APP_API_URL}/api/v1/signup`,{username,password})
+            await axios.post(`/api/v1/signup`,{username,password})
             alert("Signup Successful")
             navigate("/signin");
         }catch(e){
