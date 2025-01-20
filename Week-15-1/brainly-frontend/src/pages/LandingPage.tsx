@@ -1,10 +1,11 @@
 import { Button } from "../components/Buttons"
+const VITE_APP_API_URL = import.meta.env.VITE_APP_API_URL;
 
 export const LandingPage = () => {
   return (<div>
     <div className="flex justify-end gap-4 p-2">
-        <Button variant="primary" size="md" text="Login" onClick={() => window.location.href = `/api/v1/signin`}></Button>
-        <Button variant="primary" size="md" text="Sign Up" onClick={() => window.location.href = `/api/v1/signup`}></Button> 
+        <Button variant="primary" size="md" text="Login" onClick={() => window.location.href = `${VITE_APP_API_URL}/api/v1/signin`}></Button>
+        <Button variant="primary" size="md" text="Sign Up" onClick={() => window.location.href = `${VITE_APP_API_URL}/api/v1/signup`}></Button> 
         </div>
     <div className="flex flex-col items-center justify-center h-screen">
         <h1 className="text-4xl font-bold text-center">Welcome to</h1>
