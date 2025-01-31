@@ -3,8 +3,8 @@ import { Button } from "../components/Buttons";
 export const LandingPage = () => {
   return (<div>
     <div className="flex justify-end gap-4 p-2">
-        <Button variant="primary" size="md" text="Login" onClick={() => window.location.href = `/Signin`}></Button>
-        <Button variant="primary" size="md" text="Sign Up" onClick={() => window.location.href = `/Signup`}></Button> 
+        <Button variant="primary" size="md" text="Login" onClick={() => window.location.href = `/signin`}></Button>
+        <Button variant="primary" size="md" text="Sign Up" onClick={() => window.location.href = `/signup`}></Button> 
         </div>
     <div className="flex flex-col items-center justify-center h-screen">
         <h1 className="text-4xl font-bold text-center">Welcome to</h1>
